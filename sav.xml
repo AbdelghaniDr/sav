@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?> 
+<openerp>
+  <data>
+      <record  id="crm_test_view" model="ir.ui.view">
+            <field name="name">CRM - Claims Form</field>
+            <field name="model">crm.claim</field>		
+            <field name="inherit_id" ref="crm_claim.crm_case_claims_form_view" />
+            <field name="type">form</field>
+		    <field name="arch" type="xml"> 
+                  <field name="email_from" position="after">
+	                <group colspan="2" col="2" groups="base.group_user">
+                        <separator colspan="2" string="information client"/>
+                        <field name="partner_id1" string="Client" on_change="onchange_partner_id1(partner_id1)"/>
+                        <field name="partner_phone1"/>
+<!--                    <field name="email_from1" widget="email"/> -->
+                        <field name="street01"/>
+                        <field name="city1" string="Ville client"/>
+        	      </group>  
+        	        
+                  <group colspan="2" col="2" groups="base.group_user">
+                        <separator colspan="2" string="information Distributeur"/>
+                        <field name="partner_id2" string="Distributeur" on_change="onchange_partner_id2(partner_id2)"/>
+                        <field name="partner_phone2"/>
+ <!--                   <field name="email_from2" widget="email"/> -->
+                  </group>
+                  
+		          <group colspan="2" col="2" groups="base.group_user">
+                        <separator colspan="2" string="information Revendeur"/>
+                        <field name="partner_id3" string="Revendeur" on_change="onchange_partner3(partner_id3)"/>
+                        <field name="partner_phone3"/>
+ <!--                   <field name="email_from3" widget="email"/> -->
+                </group>
+
+
+ 		       <group colspan="2" col="2" groups="base.group_sale_manager">
+                        <separator colspan="2" string="information Produit"/>
+                        <field name="produit" />
+                        <field name="Marque"/>
+			            <field name="Modele" />
+			            <field name="Serial" />
+			            <field name="date_achat" />
+			            <field name="Desc" />
+		                <field name="File_upload" />
+
+ 		       </group>
+		  </field>
+        </field>
+      </record>
+        
+      <record  id="sav_tree_view" model="ir.ui.view">
+            <field name="name">CRM - Claims Form</field>
+            <field name="model">crm.claim</field>		
+            <field name="inherit_id" ref="crm_claim.crm_case_claims_tree_view" />
+               <field name="type">tree</field>
+		       <field name="arch" type="xml">
+               <field name="name" position="before">
+			   <field name="n_reclamation" string="N recl"/>
+			   <field name="partner_id1"/>
+			   <field name="partner_phone1"/>
+			   <field name="street01"/>
+			   <field name="produit"/>
+			   <field name="Serial"/>
+			   <field name="date_achat"/>
+		      </field>
+            </field>
+        </record>      
+        
+      <record  id="n_reclamation_view" model="ir.ui.view">
+            <field name="name">CRM - Claims Form</field>
+            <field name="model">crm.claim</field>		
+            <field name="inherit_id" ref="crm_claim.crm_case_claims_form_view" />
+            <field name="type">form</field>
+		    <field name="arch" type="xml">
+               <field name="name" position="before">
+			   <field name="n_reclamation"/>
+		       </field>
+            </field>
+        </record>
+        
+      
+      
+         <record model="ir.ui.view" id="sav_pieces_form_inherite">
+            <field name="name">crm.claim.form</field>
+            <field name="model">crm.claim</field>
+            <field name="type">form</field>
+	        <field name="inherit_id" ref="crm_claim.crm_case_claims_form_view" />
+	        <field name="arch" type="xml">
+	                <page string="Follow Up" position="after" >
+	            		<page string="Pieces de Rechonge" >
+		                	<field name="product_ids" nolabel="1" />
+	                	</page>
+	                <!-- <page string="Follow Up" groups="base.group_user">
+                                <group>
+                                <group>
+                                    <separator colspan="2" string="Actions"/>
+                                    <field name="date_action_next"/>
+                                    <field name="action_next"/>
+                                </group>
+                                <group groups="base.group_no_one">
+                                    <separator colspan="2" string="Dates"/>
+                                    <field name="create_date"/>
+                                    <field name="date_closed"/>
+                                    <field name="write_date"/>
+                                </group>
+								</group>
+                                <group colspan="2" col="2">
+                                    <separator colspan="2" string="Root Causes"/>
+                                    <field name="cause" colspan="2" nolabel="1"/>
+                                </group>
+                                <group colspan="2" col="2">
+                                    <separator colspan="2" string="Resolution Actions"/>
+                                    <field name="type_action"/>
+                                    <field name="resolution" colspan="2" nolabel="1"/>
+                                </group>
+                            </page>-->
+	                </page>
+	            </field>
+	          
+	   </record>
+   </data> 
+</openerp>

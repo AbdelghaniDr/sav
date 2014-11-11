@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+		<record id="group_sav_user" model="res.groups">
+			<field name="name">User-sav</field>
+		</record>
+
+		<record id="group_sav_manager" model="res.groups">
+			<field name="name">Manager-sav</field>
+		</record>
+		
+		
+		
+	</data>
+</openerp>
+
