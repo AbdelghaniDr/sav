@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?> 
 <openerp>
   <data>
-      <record  id="crm_test_view" model="ir.ui.view">
+       <record  id="crm_test_view" model="ir.ui.view">
             <field name="name">CRM - Claims Form</field>
             <field name="model">crm.claim</field>		
             <field name="inherit_id" ref="crm_claim.crm_case_claims_form_view" />
@@ -12,27 +12,24 @@
                         <separator colspan="2" string="information client"/>
                         <field name="partner_id1" string="Client" on_change="onchange_partner_id1(partner_id1)"/>
                         <field name="partner_phone1"/>
-<!--                    <field name="email_from1" widget="email"/> -->
                         <field name="street01"/>
                         <field name="city1" string="Ville client"/>
         	      </group>  
         	        
-                  <group colspan="2" col="2" groups="base.group_user">
+                  <group colspan="2" col="2" groups="sav.group_sav_user">
                         <separator colspan="2" string="information Distributeur"/>
                         <field name="partner_id2" string="Distributeur" on_change="onchange_partner_id2(partner_id2)"/>
                         <field name="partner_phone2"/>
- <!--                   <field name="email_from2" widget="email"/> -->
                   </group>
                   
-		          <group colspan="2" col="2" groups="base.group_user">
+		          <group colspan="2" col="2" groups="sav.group_sav_user">
                         <separator colspan="2" string="information Revendeur"/>
                         <field name="partner_id3" string="Revendeur" on_change="onchange_partner3(partner_id3)"/>
                         <field name="partner_phone3"/>
- <!--                   <field name="email_from3" widget="email"/> -->
                 </group>
 
 
- 		       <group colspan="2" col="2" groups="base.group_sale_manager">
+ 		       <group colspan="2" col="2" groups="sav.group_sav_user">
                         <separator colspan="2" string="information Produit"/>
                         <field name="produit" />
                         <field name="Marque"/>
@@ -41,12 +38,15 @@
 			            <field name="date_achat" />
 			            <field name="Desc" />
 		                <field name="File_upload" />
-
  		       </group>
+ 		       
 		  </field>
+		  
         </field>
       </record>
-        
+      
+      <!-- tree view -->
+      
       <record  id="sav_tree_view" model="ir.ui.view">
             <field name="name">CRM - Claims Form</field>
             <field name="model">crm.claim</field>		
@@ -63,7 +63,18 @@
 			   <field name="date_achat"/>
 		      </field>
             </field>
-        </record>      
+        </record>           
+        
+        <!-- action  -->
+        
+         <record id="action_view_sav" model="ir.actions.act_window">
+            <field name="name">Reclamation </field>
+            <field name="res_model">crm.claim</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record> 
+        
+      
         
       <record  id="n_reclamation_view" model="ir.ui.view">
             <field name="name">CRM - Claims Form</field>
@@ -85,11 +96,9 @@
             <field name="type">form</field>
 	        <field name="inherit_id" ref="crm_claim.crm_case_claims_form_view" />
 	        <field name="arch" type="xml">
-	                <page string="Follow Up" position="after" >
-	            		<page string="Pieces de Rechonge" >
-		                	<field name="product_ids" nolabel="1" />
-	                	</page>
-	                <!-- <page string="Follow Up" groups="base.group_user">
+	                <page string="Follow Up" position="replace" >
+	            	
+	                 <page string="Follow Up" groups="base.group_user">
                                 <group>
                                 <group>
                                     <separator colspan="2" string="Actions"/>
@@ -112,8 +121,11 @@
                                     <field name="type_action"/>
                                     <field name="resolution" colspan="2" nolabel="1"/>
                                 </group>
-                            </page>-->
-	                </page>
+                            </page>
+                            	<page string="Pieces de Rechonge" >
+		                	<field name="product_ids" nolabel="1" />
+	                	</page>
+	               </page>
 	            </field>
 	          
 	   </record>
@@ -235,6 +247,20 @@
               action="action_view_marque"
               sequence="9"
               />
-                 
+             
+ <!--  <menuitem id="menu_sav" name="SAV"  sequence="19" />    
+<menuitem
+              name="SAV"
+              id="saa_sav"
+              parent="menu_sav"
+
+              />
+              
+<menuitem
+              name="Reclamation"
+              id="rec_sav"
+              parent="saa_sav"
+              action="sav_case_claims_form_view"
+              />-->
    </data> 
 </openerp>

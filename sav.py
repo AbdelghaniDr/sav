@@ -112,3 +112,11 @@ class res_partner3(osv.osv):
         'claims_ids': fields.one2many('crm.claim', 'partner_id3', 'Claims'),
     }
 sav()
+
+class product_marque(osv.osv):
+    _name = 'product.marque'
+    _columns = {         
+        'marque_produit': fields.char(u'Marque Produit',size=64),
+        'code': fields.char(u'Code'),
+    }
+product_marque()

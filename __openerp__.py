@@ -23,7 +23,7 @@
     'version': "1.0",
     'author': "Ait-Mlouk addi /INFOSIT R&B",
     'category': "Tools",
-    'depends': ['base','product','crm_claim'],
+    'depends': ['base','crm_claim','product'],
     'data': [ 
              'security/sav_security.xml',
              'sav.xml',
