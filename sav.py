@@ -18,15 +18,9 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from openerp.addons.base_status.base_stage import base_stage
-import binascii 
-from openerp.addons.crm import crm 
-from openerp.osv import fields, osv 
-import time 
-from openerp import tools 
-from openerp.tools.translate import _ 
-from openerp.tools import html2plaintext 
-from bzrlib.errors import ReadOnlyError
+from openerp.osv import osv,fields
+import datetime
+import time
 
 class sav(osv.osv):
     _inherit = 'crm.claim'

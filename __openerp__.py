@@ -21,15 +21,12 @@
 {
     'name': "SAV",
     'version': "1.0",
-#    'author': "ELMOUTAOUKILHOUDA _FSSM _INFOSIT R&B",
-    'author': "INFOSIT R&B",
+    'author': "Ait-Mlouk addi /INFOSIT R&B",
     'category': "Tools",
-    'depends': ['base','crm_claim'],
+    'depends': ['base','product','crm_claim'],
     'data': [ 
              'security/sav_security.xml',
-             #'security/ir.model.access.csv',
              'sav.xml',
-             'product_marque.xml',
              'sav_sequence.xml',
              ],
     'demo': [],
