@@ -22,7 +22,16 @@
     'name': "SAV",
     'version': "1.0",
     'author': "Ait-Mlouk addi /INFOSIT R&B",
-    'category': "Tools",
+    'category': 'Customer Relationship Management',
+    'description': """
+
+Manage Customer Claims.
+=======================
+This application allows you to track your customers/suppliers claims and grievances.
+
+It is fully integrated with the email gateway so that you can create
+automatically new claims based on incoming emails.
+    """,
     'depends': ['base','crm_claim','product'],
     'data': [ 
              'security/sav_security.xml',
