@@ -7,19 +7,34 @@
             <field name="type">form</field>
 	        <field name="inherit_id" ref="crm_claim.crm_case_claims_form_view" />
 	        <field name="arch" type="xml">
+	        
+	            <xpath expr="/form//button[@name='case_close']" position="replace">
+			           <button name="case_close" string="Settle" type="object" class="oe_highlight"
+                            states="draft,open,pending" groups="sav.group_sav_manager"/>
+			    </xpath>
+			    <xpath expr="/form//button[@name='case_cancel']" position="replace">
+			           <button name="case_cancel" string="Reject" type="object" groups="sav.group_sav_manager"
+                            states="draft,open,pending"/>
+			    </xpath>
+			    <xpath expr="/form//field[@name='stage_id']" position="replace">
+			           <field name="stage_id" widget="statusbar" clickable="false" groups="sav.group_sav_manager"/>
+			    </xpath>
+			    
 	           <field name="name" position="before">
 			       <field name="n_reclamation"/>
 		       </field>
+		       
+		      
+			       
 	                <page string="Claim Description" position="replace" >
 	                 <page string="Claim Description">
-                                <group colspan="2" col="2" groups="sav.group_sav_user">
-                                    <separator colspan="2" string="Claim Reporter"/>
-                                    <field name="partner_id" string="Partner"
-                                        on_change="onchange_partner_id(partner_id)"/>
-                                    <field name="partner_phone"/>
-                                    <field name="email_from" widget="email"/>
-                                </group>
-                                <group colspan="2" col="2" groups="base.group_user">
+                        <group colspan="2" col="2" groups="sav.group_sav_manager">
+                           <separator colspan="2" string="Claim Reporter"/>
+                           <field name="partner_id" string="Partner" on_change="onchange_partner_id(partner_id)"/>
+                           <field name="partner_phone"/>
+                           <field name="email_from" widget="email"/>
+                        </group>
+                         <group colspan="2" col="2" groups="base.group_user">
                         <separator colspan="2" string="information client"/>
                         <field name="partner_id1" string="Client" on_change="onchange_partner_id1(partner_id1)"/>
                         <field name="partner_phone1"/>
@@ -27,18 +42,17 @@
                         <field name="city1" string="Ville client"/>
         	      </group>  
         	        
-                  <group colspan="2" col="2" groups="sav.group_sav_user">
+                  <group colspan="2" col="2" groups="sav.group_sav_manager">
                         <separator colspan="2" string="information Distributeur"/>
                         <field name="partner_id2" string="Distributeur" on_change="onchange_partner_id2(partner_id2)"/>
                         <field name="partner_phone2"/>
                   </group>
                   
-		          <group colspan="2" col="2" groups="sav.group_sav_user">
+		          <group colspan="2" col="2" groups="sav.group_sav_manager">
                         <separator colspan="2" string="information Revendeur"/>
                         <field name="partner_id3" string="Revendeur" on_change="onchange_partner3(partner_id3)"/>
                         <field name="partner_phone3"/>
                 </group>
-
 
  		       <group colspan="2" col="2" >
                         <separator colspan="2" string="information Produit"/>
@@ -50,46 +64,43 @@
 			            <field name="Desc" />
 		                <field name="File_upload" />
  		       </group>
-                                <group colspan="2" col="2" groups="base.group_user">
-                                    <separator colspan="2" string="Responsibilities"/>
-                                    <field name="user_fault"/>
-                                    <field name="categ_id" widget="selection"
-                                        domain="[('object_id.model', '=', 'crm.claim')]"/>
-                                    <field name="ref"/>
-                                </group>
-                                <separator colspan="4" string="Claim/Action Description" groups="base.group_user"/>
-                                <field name="description" colspan="4" nolabel="1"/>
-                            </page>
-
-	               </page>
-	               
-	               <page string="Follow Up" position="replace" >
-	                 <page string="Follow Up" groups="base.group_user">
-                                <group>
-                                <group>
-                                    <separator colspan="2" string="Actions"/>
-                                    <field name="date_action_next"/>
-                                    <field name="action_next"/>
-                                </group>
-                                <group groups="base.group_no_one">
-                                    <separator colspan="2" string="Dates"/>
-                                    <field name="create_date"/>
-                                    <field name="date_closed"/>
-                                    <field name="write_date"/>
-                                </group>
-								</group>
-                                <group colspan="2" col="2">
-                                    <separator colspan="2" string="Root Causes"/>
-                                    <field name="cause" colspan="2" nolabel="1"/>
-                                </group>
-                                <group colspan="2" col="2">
-                                    <separator colspan="2" string="Resolution Actions"/>
-                                    <field name="type_action"/>
-                                    <field name="resolution" colspan="2" nolabel="1"/>
-                                </group>
-                            </page>
-                            	<page string="Pieces de Rechonge" >
-		                	<field name="product_ids" nolabel="1" />
+               <group colspan="2" col="2" groups="base.group_user">
+                       <separator colspan="2" string="Responsibilities"/>
+                       <field name="user_fault"/>
+                       <field name="categ_id" widget="selection" domain="[('object_id.model', '=', 'crm.claim')]"/>
+                       <field name="ref"/>
+               </group>
+               <separator colspan="4" string="Claim/Action Description" groups="base.group_user"/>
+               <field name="description" colspan="4" nolabel="1"/>
+             </page>
+	         </page>        
+	         <page string="Follow Up" position="replace" >
+	          <page string="Follow Up" groups="base.group_user">
+                  <group>
+                    <group>
+                     <separator colspan="2" string="Actions"/>
+                     <field name="date_action_next"/>
+                     <field name="action_next"/>
+                     </group>
+                    <group groups="base.group_no_one">
+                     <separator colspan="2" string="Dates"/>
+                      <field name="create_date"/>
+                      <field name="date_closed"/>
+                      <field name="write_date"/>
+                        </group>
+						</group>
+                       <group colspan="2" col="2">
+                       <separator colspan="2" string="Root Causes"/>
+                        <field name="cause" colspan="2" nolabel="1"/>
+                        </group>
+                        <group colspan="2" col="2">
+                         <separator colspan="2" string="Resolution Actions"/>
+                         <field name="type_action"/>
+                         <field name="resolution" colspan="2" nolabel="1"/>
+                          </group>
+                        </page>
+                        <page string="Pieces de Rechonge" >
+		                <field name="product_ids" nolabel="1" />
 	                	</page>
 	               </page>
 	               
@@ -116,16 +127,9 @@
 		      </field>
             </field>
         </record>           
-        
-        <!-- action  -->
-        
-         <record id="action_view_sav" model="ir.actions.act_window">
-            <field name="name">Reclamation </field>
-            <field name="res_model">crm.claim</field>
-            <field name="view_type">form</field>
-            <field name="view_mode">tree,form</field>
-        </record> 
 
+        
+       <!-- product brand form -->
 	   
 	   <record id="marque_view_form" model="ir.ui.view">
         <field name="name">product.marque.form</field>
@@ -145,6 +149,9 @@
              </form>
 		  </field>
     </record>  
+    
+    <!-- product brand tree -->
+    
     <record id="view_marque_tree" model="ir.ui.view">
             <field name="name">product.marque.tree</field>
             <field name="model">product.marque</field>
@@ -156,6 +163,8 @@
                 </tree>
             </field>
         </record>
+        
+       <!-- product brand action -->
         
        <record id="action_view_marque" model="ir.actions.act_window">
             <field name="name">Marque </field>
@@ -174,14 +183,14 @@
               sequence="9"
               />
 	   
-	
+	     <!-- claim tree -->
 	
 	      <record  id="sav_tree_view" model="ir.ui.view">
             <field name="name">CRM - Claims Form</field>
             <field name="model">crm.claim</field>		
             <field name="inherit_id" ref="crm_claim.crm_case_claims_tree_view" />
-               <field name="type">tree</field>
-		       <field name="arch" type="xml">
+            <field name="type">tree</field>
+		    <field name="arch" type="xml">
                <field name="name" position="before">
 			   <field name="n_reclamation" string="N recl"/>
 			   <field name="partner_id1"/>
@@ -190,12 +199,11 @@
 			   <field name="produit"/>
 			   <field name="Serial"/>
 			   <field name="date_achat"/>
-			   
-
-		</field>
+		       </field>
             </field>
         </record>
         
+        <!-- product form -->
         
         <record id="marque_view_form" model="ir.ui.view">
         <field name="name">product.marque.form</field>
@@ -218,7 +226,10 @@
                     </sheet>
                 </form>
 		  </field>
-    </record>  
+    </record> 
+    
+    <!-- product tree --> 
+    
     <record id="view_marque_tree" model="ir.ui.view">
             <field name="name">product.marque.tree</field>
             <field name="model">product.marque</field>
@@ -230,6 +241,8 @@
                 </tree>
             </field>
         </record>
+        
+        <!-- product action -->
         
        <record id="action_view_marque" model="ir.actions.act_window">
             <field name="name">Marque </field>
