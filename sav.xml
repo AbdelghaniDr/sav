@@ -1,14 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?> 
 <openerp>
-  <data>
-       <record  id="crm_test_view" model="ir.ui.view">
-            <field name="name">CRM - Claims Form</field>
-            <field name="model">crm.claim</field>		
-            <field name="inherit_id" ref="crm_claim.crm_case_claims_form_view" />
+  <data>      
+      <record model="ir.ui.view" id="crm_test_view">
+            <field name="name">crm.claim.form</field>
+            <field name="model">crm.claim</field>
             <field name="type">form</field>
-		    <field name="arch" type="xml"> 
-                  <field name="email_from" position="after">
-	                <group colspan="2" col="2" groups="base.group_user">
+	        <field name="inherit_id" ref="crm_claim.crm_case_claims_form_view" />
+	        <field name="arch" type="xml">
+	           <field name="name" position="before">
+			       <field name="n_reclamation"/>
+		       </field>
+	                <page string="Claim Description" position="replace" >
+	                 <page string="Claim Description">
+                                <group colspan="2" col="2" groups="sav.group_sav_user">
+                                    <separator colspan="2" string="Claim Reporter"/>
+                                    <field name="partner_id" string="Partner"
+                                        on_change="onchange_partner_id(partner_id)"/>
+                                    <field name="partner_phone"/>
+                                    <field name="email_from" widget="email"/>
+                                </group>
+                                <group colspan="2" col="2" groups="base.group_user">
                         <separator colspan="2" string="information client"/>
                         <field name="partner_id1" string="Client" on_change="onchange_partner_id1(partner_id1)"/>
                         <field name="partner_phone1"/>
@@ -29,7 +40,7 @@
                 </group>
 
 
- 		       <group colspan="2" col="2" groups="sav.group_sav_user">
+ 		       <group colspan="2" col="2" >
                         <separator colspan="2" string="information Produit"/>
                         <field name="produit" />
                         <field name="Marque"/>
@@ -39,65 +50,20 @@
 			            <field name="Desc" />
 		                <field name="File_upload" />
  		       </group>
- 		       
-		  </field>
-		  
-        </field>
-      </record>
-      
-      <!-- tree view -->
-      
-      <record  id="sav_tree_view" model="ir.ui.view">
-            <field name="name">CRM - Claims Form</field>
-            <field name="model">crm.claim</field>		
-            <field name="inherit_id" ref="crm_claim.crm_case_claims_tree_view" />
-               <field name="type">tree</field>
-		       <field name="arch" type="xml">
-               <field name="name" position="before">
-			   <field name="n_reclamation" string="N recl"/>
-			   <field name="partner_id1"/>
-			   <field name="partner_phone1"/>
-			   <field name="street01"/>
-			   <field name="produit"/>
-			   <field name="Serial"/>
-			   <field name="date_achat"/>
-		      </field>
-            </field>
-        </record>           
-        
-        <!-- action  -->
-        
-         <record id="action_view_sav" model="ir.actions.act_window">
-            <field name="name">Reclamation </field>
-            <field name="res_model">crm.claim</field>
-            <field name="view_type">form</field>
-            <field name="view_mode">tree,form</field>
-        </record> 
-        
-      
-        
-      <record  id="n_reclamation_view" model="ir.ui.view">
-            <field name="name">CRM - Claims Form</field>
-            <field name="model">crm.claim</field>		
-            <field name="inherit_id" ref="crm_claim.crm_case_claims_form_view" />
-            <field name="type">form</field>
-		    <field name="arch" type="xml">
-               <field name="name" position="before">
-			   <field name="n_reclamation"/>
-		       </field>
-            </field>
-        </record>
-        
-      
-      
-         <record model="ir.ui.view" id="sav_pieces_form_inherite">
-            <field name="name">crm.claim.form</field>
-            <field name="model">crm.claim</field>
-            <field name="type">form</field>
-	        <field name="inherit_id" ref="crm_claim.crm_case_claims_form_view" />
-	        <field name="arch" type="xml">
-	                <page string="Follow Up" position="replace" >
-	            	
+                                <group colspan="2" col="2" groups="base.group_user">
+                                    <separator colspan="2" string="Responsibilities"/>
+                                    <field name="user_fault"/>
+                                    <field name="categ_id" widget="selection"
+                                        domain="[('object_id.model', '=', 'crm.claim')]"/>
+                                    <field name="ref"/>
+                                </group>
+                                <separator colspan="4" string="Claim/Action Description" groups="base.group_user"/>
+                                <field name="description" colspan="4" nolabel="1"/>
+                            </page>
+
+	               </page>
+	               
+	               <page string="Follow Up" position="replace" >
 	                 <page string="Follow Up" groups="base.group_user">
                                 <group>
                                 <group>
@@ -126,10 +92,40 @@
 		                	<field name="product_ids" nolabel="1" />
 	                	</page>
 	               </page>
+	               
 	            </field>
 	          
 	   </record>
 	   
+      <!-- tree view -->
+      
+      <record  id="sav_tree_view" model="ir.ui.view">
+            <field name="name">CRM - Claims Form</field>
+            <field name="model">crm.claim</field>		
+            <field name="inherit_id" ref="crm_claim.crm_case_claims_tree_view" />
+               <field name="type">tree</field>
+		       <field name="arch" type="xml">
+               <field name="name" position="before">
+			   <field name="n_reclamation" string="N recl"/>
+			   <field name="partner_id1"/>
+			   <field name="partner_phone1"/>
+			   <field name="street01"/>
+			   <field name="produit"/>
+			   <field name="Serial"/>
+			   <field name="date_achat"/>
+		      </field>
+            </field>
+        </record>           
+        
+        <!-- action  -->
+        
+         <record id="action_view_sav" model="ir.actions.act_window">
+            <field name="name">Reclamation </field>
+            <field name="res_model">crm.claim</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record> 
+
 	   
 	   <record id="marque_view_form" model="ir.ui.view">
         <field name="name">product.marque.form</field>
@@ -205,7 +201,7 @@
         <field name="name">product.marque.form</field>
         <field name="model">product.marque</field>
         <field name="arch" type="xml">
-           <form string="Matière" version="7.0">
+           <form string="Produit" version="7.0">
                     <sheet>
                       <group>
 		                	<group>
@@ -215,8 +211,12 @@
 			                	<field name="code" />
 			                </group>
 		               </group>
-                    </sheet>	
-             </form>
+                    <newline/>
+	                	<group colspan="2" string="Description"  >
+	                		<field name="description" nolabel="1" />
+	                	</group>
+                    </sheet>
+                </form>
 		  </field>
     </record>  
     <record id="view_marque_tree" model="ir.ui.view">
@@ -248,19 +248,5 @@
               sequence="9"
               />
              
- <!--  <menuitem id="menu_sav" name="SAV"  sequence="19" />    
-<menuitem
-              name="SAV"
-              id="saa_sav"
-              parent="menu_sav"
-
-              />
-              
-<menuitem
-              name="Reclamation"
-              id="rec_sav"
-              parent="saa_sav"
-              action="sav_case_claims_form_view"
-              />-->
    </data> 
 </openerp>

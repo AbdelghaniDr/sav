@@ -118,5 +118,6 @@ class product_marque(osv.osv):
     _columns = {         
         'marque_produit': fields.char(u'Marque Produit',size=64),
         'code': fields.char(u'Code'),
+        'description': fields.text(u'Code'),
     }
 product_marque()
