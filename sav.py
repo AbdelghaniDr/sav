@@ -33,7 +33,7 @@ class sav(osv.osv):
     
 
     _columns = {
-        'n_reclamation': fields.char('N reclamation'),
+        'n_reclamation': fields.char('N reclamation', required=True, readonly=True),
         'company_id1': fields.many2one('res.company', 'Societe Client'),
         'partner_id1': fields.many2one('res.partner', 'Client'),
         'email_from1': fields.char('Email client', size=128, help="Destination email for email gateway."),
@@ -59,7 +59,7 @@ class sav(osv.osv):
 	}
 
     _defaults = {
-        'n_reclamation': lambda self, cr, uid, context: '/',   
+        'n_reclamation': lambda self, cr, uid, context: 'Num auto',   
         
 	}
     
@@ -94,29 +94,23 @@ class sav(osv.osv):
                 data ['email_from3'] = data_sav_model['email']
                 data ['partner_phone3'] = data_sav_model['phone']
         return {'value' : data }
-    
+sav()
+
 
 class res_partner1(osv.osv):
     _inherit = 'res.partner'
     _columns = {
         'claims_ids': fields.one2many('crm.claim', 'partner_id1', 'Claims'),
+        'claims_ids2': fields.one2many('crm.claim', 'partner_id2', 'Claims'),
+        'claims_ids3': fields.one2many('crm.claim', 'partner_id3', 'Claims'),
     }
-class res_partner2(osv.osv):
-    _inherit = 'res.partner'
-    _columns = {
-        'claims_ids': fields.one2many('crm.claim', 'partner_id2', 'Claims'),
-    }
-class res_partner3(osv.osv):
-    _inherit = 'res.partner'
-    _columns = {
-        'claims_ids': fields.one2many('crm.claim', 'partner_id3', 'Claims'),
-    }
-sav()
+    
+res_partner1()
 
 class product_marque(osv.osv):
     _name = 'product.marque'
     _columns = {         
-        'marque_produit': fields.char(u'Marque Produit',size=64),
+        'marque_produit': fields.char(u'Marque Produit', required=True),
         'code': fields.char(u'Code'),
         'description': fields.text(u'Code'),
     }

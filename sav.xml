@@ -145,18 +145,22 @@
         <field name="name">product.marque.form</field>
         <field name="model">product.marque</field>
         <field name="arch" type="xml">
-           <form string="Matière" version="7.0">
+           <form string="Produit" version="7.0">
                     <sheet>
                       <group>
 		                	<group>
 				                <field name="marque_produit" />
 				            </group>
-			                <group>
+			                <group>	
 			                	<field name="code" />
 			                </group>
 		               </group>
-                    </sheet>	
-             </form>
+                    <newline/>
+	                	<group colspan="2" string="Description"  >
+	                		<field name="description" nolabel="1" />
+	                	</group>
+                    </sheet>
+                </form>
 		  </field>
     </record>  
     

@@ -23,6 +23,7 @@
     'version': "1.0",
     'author': "Ait-Mlouk addi /INFOSIT R&B",
     'category': 'Customer Relationship Management',
+    'summary' : 'Reclamation,Produit, Marque',
     'description': """
 
 Manage Customer Claims.
