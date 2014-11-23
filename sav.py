@@ -35,7 +35,8 @@ class sav(osv.osv):
     _columns = {
         'n_reclamation': fields.char('N reclamation', required=True, readonly=True),
         'company_id1': fields.many2one('res.company', 'Societe Client'),
-        'partner_id1': fields.many2one('res.partner', 'Client'),
+        'partner_id': fields.many2one('res.partner', u'Partner', required=True),
+        'partner_id1': fields.many2one('res.partner', u'Client', required=True),
         'email_from1': fields.char('Email client', size=128, help="Destination email for email gateway."),
 		'partner_phone1': fields.char('Phone client', size=32),
         'street01': fields.char('Address client', size=128),
@@ -118,7 +119,7 @@ res_partner1()
 class claim_follow(osv.osv):
     _name = 'claim.follow'
     _columns = {         
-        'date': fields.date_time(u'Date', required=True),
+        'date': fields.datetime(u'Date', required=True),
         'description': fields.text(u'Description'),
         'follow':fields.many2one('crm.claim',u'Reclamation')
     }

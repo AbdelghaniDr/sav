@@ -21,14 +21,15 @@
 			    </xpath>
 			    
 	           <field name="name" position="before">
-			       <field name="num_facture"/>
 			       <field name="n_reclamation"/>
+			       <field name="num_facture"/>
 			       <field name="reference"/>
 			       <field name="klm"/>
-			       
+
 			       <field name="selection"/>
 			       <field name="cde_piece"/>
 			       <field name="administratif"/>
+
 		       </field>
 		       
 		      
@@ -131,8 +132,8 @@
             <field name="name">CRM - Claims Form</field>
             <field name="model">crm.claim</field>		
             <field name="inherit_id" ref="crm_claim.crm_case_claims_tree_view" />
-               <field name="type">tree</field>
-		       <field name="arch" type="xml">
+            <field name="type">tree</field>
+		    <field name="arch" type="xml">
                <field name="name" position="before">
 			   <field name="n_reclamation" string="N recl"/>
 			   <field name="partner_id1"/>
@@ -147,14 +148,30 @@
         
        <!-- sav  action -->
         
-       <record id="act_claim_partner" model="ir.actions.act_window">
+   <!--      <record id="crm_case_categ_claim0" model="ir.actions.act_window">
             <field name="name">Marque </field>
             <field name="res_model">crm.claim</field>
             <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
            <field name="domain" >[('state','=','draft')]</field>
-           <field name="context">{"search_default_user_id":uid, "stage_type":'claim','default_state' : 'draft'}</field>
+          <field name="context">{"search_default_user_id":uid, "stage_type":'claim'}</field>
            
+        </record>-->
+        
+        <record model="ir.actions.act_window" id="crm_case_categ_claim1">
+            <field name="name">Claims</field>
+            <field name="res_model">crm.claim</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,calendar,form</field>
+            <field name="view_id" ref="crm_claim.crm_case_claims_tree_view"/>
+            <field name="domain" >[('state','in',('draft', 'open'))]</field>
+            <field name="context">{"search_default_user_id":uid, "stage_type":'claim'}</field>
+            <field name="search_view_id" ref="crm_claim.view_crm_case_claims_filter"/>
+            <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Record and track your customers' claims. Claims may be linked to a sales order or a lot.You can send emails with attachments and keep the full history for a claim (emails sent, intervention type and so on).Claims may automatically be linked to an email address using the mail gateway module.
+            </p>
+            </field>
         </record>
         
        <!-- product brand form -->
@@ -214,11 +231,11 @@
               sequence="9"
               />	  
                
-     <menuitem
+       <menuitem
               name="reclamation"
               id="pMarque_config_rec"
               parent="base.menu_product"
-              action="act_claim_partner"
+              action="crm_case_categ_claim1"
 
               />	  
              
