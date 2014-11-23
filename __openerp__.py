@@ -38,6 +38,7 @@ automatically new claims based on incoming emails.
              'security/ir.model.access.csv',
              'security/sav_security.xml',
              'sav.xml',
+             'sav_menu.xml',
              'sav_sequence.xml',
              ],
     'demo': [],
