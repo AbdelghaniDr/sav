@@ -30,7 +30,7 @@ class sav(osv.osv):
         if ('n_reclamation' not in vals) or (vals.get('n_reclamation')=='/'):
             vals['n_reclamation'] = self.pool.get('ir.sequence').get(cr, user, 'crm.claim')
         return super(sav, self).create(cr, user, vals, context)
-    
+
 
     _columns = {
         'n_reclamation': fields.char('N reclamation', required=True, readonly=True),
@@ -55,7 +55,14 @@ class sav(osv.osv):
         'Marque' : fields.many2one('product.marque', 'Marque'),
 		'Serial': fields.char('N de serie', size=64),
 		'File_upload': fields.binary ("Bonne d'achat"),
+        'follow_ids': fields.one2many('claim.follow','follow',u'Suivi'),
         'product_ids': fields.many2many('product.product','product_equipment_rel','product_id','equipment_id','Piece of change'),
+        'num_facture': fields.char(u'N facture'),
+        'selection': fields.boolean(u'Selection'),
+        'cde_piece': fields.boolean(u'Commande piece'),
+        'administratif': fields.boolean(u'Administratif'),
+        'reference': fields.char(u'Réference'),
+        'klm': fields.integer(u'Kilometrage'),
 	}
 
     _defaults = {
@@ -107,11 +114,44 @@ class res_partner1(osv.osv):
     
 res_partner1()
 
+
+class claim_follow(osv.osv):
+    _name = 'claim.follow'
+    _columns = {         
+        'date': fields.date_time(u'Date', required=True),
+        'description': fields.text(u'Description'),
+        'follow':fields.many2one('crm.claim',u'Reclamation')
+    }
+    
+    
+    _defaults = {
+                          
+        'date': lambda *a : time.strftime('%Y-%m-%d %H:%M:%S'),
+        
+              }
+    
+claim_follow()    
+
+
 class product_marque(osv.osv):
     _name = 'product.marque'
     _columns = {         
         'marque_produit': fields.char(u'Marque Produit', required=True),
         'code': fields.char(u'Code'),
         'description': fields.text(u'Code'),
+
     }
+    
+    
+    def name_get(self, cr, uid, ids, context=None):
+        res=[]
+        if context is None:
+            context = {}
+        if not len(ids):
+            return []
+        if context.get('show_ref'):
+            res = [(r['id'], r['ref']) for r in self.read(cr, uid, ids, ['ref'], context)]
+        else:
+            res = [(r['id'], u'%s' %(r['marque_produit'] or '')) for r in self.read(cr, uid, ids, ['marque_produit'], context)]
+        return res
 product_marque()

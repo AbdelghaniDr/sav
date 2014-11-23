@@ -35,8 +35,8 @@ automatically new claims based on incoming emails.
     """,
     'depends': ['base','crm_claim','product'],
     'data': [ 
-             'security/sav_security.xml',
              'security/ir.model.access.csv',
+             'security/sav_security.xml',
              'sav.xml',
              'sav_sequence.xml',
              ],
