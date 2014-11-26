@@ -1,3 +1,3 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_product_marque,product.marque,model_product_marque,group_sav_user,1,0,0,0
-access_claim_follow,claim.follow,model_claim_follow,group_sav_user,1,0,0,0
+access_product_marque,product.marque,model_product_marque,base.group_user,1,0,0,0
+access_claim_follow,claim.follow,model_claim_follow,base.group_user,1,0,0,0
