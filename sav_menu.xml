@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+    	
+    	<menuitem id="menu_sav" name="SAV"  sequence="18" />
+    	
+    	<!-- menu sav -->
+    	<menuitem id="menu_sav_claim" name="After-Sale Services" parent="menu_sav" sequence="1"/>
+              <menuitem id="sav_claim" name="Reclamation" parent="menu_sav_claim" action="crm_case_categ_claim1"/>
+              <menuitem id="sav_product_brand" name="Marque produit" parent="menu_sav_claim" action="action_view_marque"/>
+
+    </data>
+</openerp>
