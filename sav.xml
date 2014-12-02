@@ -83,7 +83,7 @@
              </page>
 	         </page>        
 	         <page string="Follow Up" position="replace" >
-	          <page string="Follow Up" groups="sav.group_sav_manager">
+	          <page string="Follow Up" groups="sav.group_sav_manager,sav.group_sav_manager">
                   <group>
                     <group>
                      <separator colspan="2" string="Actions"/>
@@ -95,31 +95,28 @@
                       <field name="create_date"/>
                       <field name="date_closed"/>
                       <field name="write_date"/>
-                        </group>
-						</group>
-                       <group colspan="2" col="2">
-                       <separator colspan="2" string="Root Causes"/>
-                        <field name="cause" colspan="2" nolabel="1"/>
-                        </group>
-                        <group colspan="2" col="2">
-                         <separator colspan="2" string="Resolution Actions"/>
-                         <field name="type_action"/>
-                         <field name="resolution" colspan="2" nolabel="1"/>
-                        </group>
+                      </group>
+				      </group>
+
+                      <field name="follow_ids">
+		                  <tree editable="bottom">
+		                    <field name="date"/>
+		                    <field name="description"/>      
+		                  </tree>
+		               </field>
+
                   </page>
                         
                   <page string="Pieces de Rechonge" groups="sav.group_sav_manager">
-		                <field name="product_ids" nolabel="1" />
+		               <field name="product_ids" >
+		               <tree>
+		                 <field name ="name"/>
+		                 <field name ="categ_id"/>
+		                 <field name ="default_code"/>
+		               </tree>
+		               </field>
 	              </page>
 	                	
-	              <page string="Le Suivi-1" groups="sav.group_sav_manager">
-		                <field name="follow_ids" nolabel="1" >
-		                   <tree editable="bottom">
-		                     <field name="date"/>
-		                     <field name="description"/>      
-		                   </tree>
-		                   </field>
-	              </page>
 	            </page>
 	               
 	          </field>
@@ -183,6 +180,7 @@
                       <group>
 		                	<group>
 				                <field name="marque_produit" />
+				                <field name="partner_id2" />
 				            </group>
 			                <group>	
 			                	<field name="code" />

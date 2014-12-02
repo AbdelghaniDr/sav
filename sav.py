@@ -36,13 +36,13 @@ class sav(osv.osv):
         'n_reclamation': fields.char('N reclamation', required=True, readonly=True),
         'company_id1': fields.many2one('res.company', 'Societe Client'),
         'partner_id': fields.many2one('res.partner', u'Partner', required=True),
-        'partner_id1': fields.many2one('res.partner', u'Client', required=True),
+        'partner_id1': fields.many2one('res.partner', u'Client', required=True, domain=[('customer','=',True)]),
         'email_from1': fields.char('Email client', size=128, help="Destination email for email gateway."),
 		'partner_phone1': fields.char('Phone client', size=32),
         'street01': fields.char('Address client', size=128),
         'city1': fields.char('Ville client', size=128),
 		'company_id2': fields.many2one('res.company', 'Societe Distributeur'),
-        'partner_id2': fields.many2one('res.partner', 'Distributeur'),
+        'partner_id2': fields.many2one('res.partner', 'Distributeur',domain=[('supplier','=',True)]),
         'email_from2': fields.char('Email Distributeur', size=128, help="Destination email for email gateway."),
 		'partner_phone2': fields.char('Phone Distributeur', size=32),
 		'company_id3': fields.many2one('res.company', 'Societe Revendeur'),
@@ -53,7 +53,7 @@ class sav(osv.osv):
 		'Modele': fields.char('Model Produit', size=64),
 		'date_achat': fields.datetime('Date Achat'),
 		'Desc': fields.text('description pane '),   
-        'Marque' : fields.many2one('product.marque', 'Marque'),
+        'Marque' : fields.many2one('product.marque', u'Marque',domain="[('partner_id2','=',partner_id2)]"),
 		'Serial': fields.char('N de serie', size=64),
 		'File_upload': fields.binary ("Bonne d'achat"),
         'follow_ids': fields.one2many('claim.follow','follow',u'Suivi'),
@@ -139,6 +139,7 @@ class product_marque(osv.osv):
     _columns = {         
         'marque_produit': fields.char(u'Marque Produit', required=True),
         'code': fields.char(u'Code'),
+        'partner_id2': fields.many2one('res.partner', u'Fournisseur',domain=[('supplier','=',True)]),
         'description': fields.text(u'Code'),
 
     }

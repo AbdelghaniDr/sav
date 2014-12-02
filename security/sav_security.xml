@@ -8,9 +8,7 @@
 		<record id="group_sav_manager" model="res.groups">
 			<field name="name">Manager-sav</field>
 		</record>
-		
-		
-		
+
 	</data>
 </openerp>
 
