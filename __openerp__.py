@@ -34,12 +34,12 @@ It is fully integrated with the email gateway so that you can create
 automatically new claims based on incoming emails.
     """,
     'depends': ['base','crm_claim','product'],
-    'data': [ 
-             'security/ir.model.access.csv',
+    'data': [          
              'security/sav_security.xml',
-             'sav.xml',
+             'crm_claim_view.xml',
              'sav_menu.xml',
              'sav_sequence.xml',
+             'security/ir.model.access.csv',
              ],
     'demo': [],
     'installable': True,

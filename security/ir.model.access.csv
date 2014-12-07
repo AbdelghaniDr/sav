@@ -1,3 +1,6 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_product_marque,product.marque,model_product_marque,base.group_user,1,0,0,0
-access_claim_follow,claim.follow,model_claim_follow,base.group_user,1,0,0,0
+access_product_marque_sav,product.marque,model_product_marque,group_sav_user,1,0,0,0
+access_claim_follow_sav,claim.follow,model_claim_follow,group_sav_user,1,0,0,0
+access_res_partner_sav,res.partner,model_res_partner,group_sav_user,1,0,0,0
+access_crm_claim_stage_user_sav,crm.claim.stage.user,crm_claim.model_crm_claim_stage,group_sav_user,1,0,0,0
+
