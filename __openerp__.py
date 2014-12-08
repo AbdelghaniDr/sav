@@ -19,7 +19,7 @@
 #
 ##############################################################################
 {
-    'name': "SAV",
+    'name': "After Sale services",
     'version': "1.0",
     'author': "Ait-Mlouk addi /INFOSIT R&B",
     'category': 'Customer Relationship Management',
